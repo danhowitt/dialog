@@ -616,8 +616,11 @@ export class DialogConfiguration {
   }
 
   _apply() {
-    this.aurelia.singleton(Renderer, this.renderer);
+    this.aurelia.transient(Renderer, this.renderer);
     this.resources.forEach(resourceName => this.aurelia.globalResources(resources[resourceName]));
-    DOM.injectStyles(this.cssText);
+    
+    if (this.cssText) {
+      DOM.injectStyles(this.cssText);
+    }
   }
 }

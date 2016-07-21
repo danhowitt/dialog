@@ -561,11 +561,14 @@ var DialogConfiguration = exports.DialogConfiguration = function () {
   DialogConfiguration.prototype._apply = function _apply() {
     var _this7 = this;
 
-    this.aurelia.singleton(Renderer, this.renderer);
+    this.aurelia.transient(Renderer, this.renderer);
     this.resources.forEach(function (resourceName) {
       return _this7.aurelia.globalResources(resources[resourceName]);
     });
-    _aureliaPal.DOM.injectStyles(this.cssText);
+
+    if (this.cssText) {
+      _aureliaPal.DOM.injectStyles(this.cssText);
+    }
   };
 
   return DialogConfiguration;
